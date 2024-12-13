@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="../src/styles/output.css" rel="stylesheet">
+    <script src="/src/ui/auth/login.js" type="module" defer></script>
+    <script src="/src/ui/auth/register.js" type="module" defer></script>
+</head>
+<body class="bg-gradient-to-br from-gray-800 via-purple-800 to-gray-900">
+
+    <!-- Login Form -->
+    <div id="login" class="flex h-screen flex-col items-center justify-center ">
+        <div class="w-auto max-w-md flex flex-col items-center gap-8 bg-opacity-80  bg-white rounded-lg shadow-lg backdrop-blur-md px-10 py-16">
+            <h1 class="text-5xl font-bold text-gray-800">Welcome Back</h1>
+            <p class="text-gray-500 text-center">Please log in to your account</p>
+            <div class="w-full">
+                <label for="loginEmail" class="block text-sm font-medium text-gray-700">Email</label>
+                <input id="loginEmail" type="email" class="input input-bordered w-full text-base px-4 py-3 mt-2 rounded-md focus:ring-2 focus:ring-purple-500" placeholder="Enter your email" />
+            </div>
+            <div class="w-full">
+                <label for="loginPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                <input id="loginPassword" type="password" class="input input-bordered w-full text-base px-4 py-3 mt-2 rounded-md focus:ring-2 focus:ring-purple-500" placeholder="Enter your password" />
+            </div>
+            <button id="loginBtn" class="btn btn-primary w-full text-lg font-medium py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-md">Login</button>
+            <p id="errorMessage" style="color: red; display: none;" class="text-sm mt-2"></p>
+            <p id="registerPrompt" class="text-sm text-gray-500">Don't have an account? <a href="#" id="registerLink" class="text-purple-600 hover:underline">Register here</a></p>
+        </div>
+    </div>
+
+    <!-- Register Form -->
+    <div id="register" style="display: none;" class="flex h-screen flex-col items-center justify-center p-8">
+        <div class="w-auto max-w-md flex flex-col items-center gap-8 bg-opacity-80 bg-white rounded-lg shadow-lg backdrop-blur-md px-10 py-16">
+            <h1 class="text-5xl font-bold text-gray-800">Join Us</h1>
+            <p class="text-gray-500 text-center">Create your account</p>
+            <div class="w-full">
+                <label for="registerUsername" class="block text-sm font-medium text-gray-700">Username</label>
+                <input id="registerUsername" type="text" class="input input-bordered w-full text-base px-4 py-3 mt-2 rounded-md focus:ring-2 focus:ring-purple-500" placeholder="Enter your username" />
+            </div>
+            <div class="w-full">
+                <label for="registerEmail" class="block text-sm font-medium text-gray-700">Email</label>
+                <input id="registerEmail" type="email" class="input input-bordered w-full text-base px-4 py-3 mt-2 rounded-md focus:ring-2 focus:ring-purple-500" placeholder="Enter your email" />
+            </div>
+            <div class="w-full">
+                <label for="registerPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                <input id="registerPassword" type="password" class="input input-bordered w-full text-base px-4 py-3 mt-2 rounded-md focus:ring-2 focus:ring-purple-500" placeholder="Enter your password" />
+            </div>
+            <button id="registerBtn" class="btn btn-primary w-full text-lg font-medium py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-md">Register</button>
+            <p id="loginPrompt" class="text-sm text-gray-500">Already have an account? <a href="#" id="loginLink" class="text-purple-600 hover:underline">Login here</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

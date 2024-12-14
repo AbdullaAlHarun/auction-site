@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="/src/ui/profile/profile.js" type="module" defer></script>
+  </head>
+  <body
+    data-theme="dark"
+    class="bg-gradient-to-br from-gray-900 via-gray-800 to-purple-900 text-gray-100"
+  >
+    <!-- Header -->
+    <header
+      class="bg-gradient-to-br from-gray-800 via-purple-800 to-gray-900 shadow-lg"
+    >
+      <div class="container mx-auto flex items-center justify-between p-4">
+        <a
+          href="index.html"
+          class="flex items-center text-2xl font-bold text-white"
+        >
+          <span class="text-white">Bid</span
+          ><span class="text-red-400">Nest</span>
+        </a>
+        <div class="flex items-center gap-4">
+          <div class="text-right">
+            <p id="nameHeader" class="font-bold"></p>
+            <p class="text-sm text-green-400 ">
+              Credits: <span id="creditsHeader"></span>
+            </p>
+          </div>
+          <div class="dropdown dropdown-end">
+            <label tabindex="0" class="btn btn-circle avatar">
+              <div class="w-10 rounded-full">
+                <img class="avatar-image" src="" alt="User Avatar" />
+              </div>
+            </label>
+            <ul
+              tabindex="0"
+              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-gray-700 rounded-box w-52"
+            >
+              <li><a href="index.html">Profile</a></li>
+              <li><a href="create.html">Create Listing</a></li>
+              <li><a id="loginAnchor" href="index.html">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-8">
+      <!-- Profile Header -->
+      <section class="text-center mb-8">
+        <h1 class="text-3xl font-extrabold">Welcome to Your Profile</h1>
+        <p class="text-gray-400">
+            Manage your auctions, account details, and activity history
+        </p>
+        <div class="mt-4 justify-center flex">
+          <a href="create.html">
+            <button
+              class="text-white btn bg-amber-600 hover:bg-amber-700 sm:flex"
+            >
+              Create Listing
+            </button>
+          </a>
+        </div>
+      </section>
+
+      <div class="flex flex-wrap gap-8 justify-center">
+        <!-- Avatar Section -->
+        <div class="card bg-gray-700 p-6 shadow-xl">
+          <div class="flex flex-col items-center gap-4">
+            <img
+              id="avatar"
+              class="h-40 w-40 rounded-full object-cover"
+              src=""
+              alt="User Avatar"
+            />
+            <p id="email" class="text-lg font-semibold"></p>
+            <button id="editAvatarBtn" class="btn btn-warning">
+              Edit Avatar
+            </button>
+          </div>
+          <div id="editAvatarModal" class="hidden mt-4 flex flex-col gap-4">
+            <input
+              type="text"
+              id="avatarUrlInput"
+              class="input input-bordered w-full"
+              placeholder="Enter new avatar URL"
+            />
+            <div class="text-sm text-gray-400">
+              Use a live image URL starting with
+              <span class="text-green-400">https://</span>
+            </div>
+            <div class="flex gap-2">
+              <button id="submitAvatarBtn" class="btn btn-success">
+                Update
+              </button>
+              <button id="cancelAvatarBtn" class="btn btn-error">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Information Section -->
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold text-center mb-6">
+            Account Information
+          </h2>
+          <div
+            class="flex flex-col lg:flex-row justify-between items-center gap-8 px-4 lg:px-12"
+          >
+            <!-- Credits Card -->
+            <div
+              class="card w-full lg:w-1/4 bg-gray-700 shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6"
+            >
+              <div class="flex flex-col items-center">
+                <i class="ph ph-coin text-5xl text-amber-500 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Credits</h3>
+                <p class="text-lg font-semibold text-amber-400" id="credits">
+                  1000
+                </p>
+                <progress
+                  class="progress progress-warning w-full mt-4"
+                  value="1000"
+                  max="5000"
+                ></progress>
+                <p class="text-sm text-gray-400 mt-2">Max: 5000</p>
+              </div>
+            </div>
+
+            <!-- Listings Card -->
+            <div
+              class="card w-full lg:w-1/4 bg-gray-700 shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6"
+            >
+              <div class="flex flex-col items-center">
+                <i class="ph ph-list-checks text-5xl text-blue-500 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Listings</h3>
+                <p class="text-lg font-semibold text-blue-400" id="listings">
+                  0
+                </p>
+                <div
+                  class="radial-progress text-blue-500 mt-4"
+                  style="--value: 0; --size: 6rem; --thickness: 6px"
+                ></div>
+                <p class="text-sm text-gray-400 mt-2">
+                  Track your active listings
+                </p>
+              </div>
+            </div>
+
+            <!-- Wins Card -->
+            <div
+              class="card w-full lg:w-1/4 bg-gray-700 shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6"
+            >
+              <div class="flex flex-col items-center">
+                <i class="ph ph-trophy text-5xl text-green-500 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Wins</h3>
+                <p class="text-lg font-semibold text-green-400" id="wins">0</p>
+                <progress
+                  class="progress progress-success w-full mt-4"
+                  value="0"
+                  max="10"
+                ></progress>
+                <p class="text-sm text-gray-400 mt-2">Max: 10</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="rounded p-10 footer footer-center bg-opacity-80 bg-gradient-to-br from-gray-800 via-purple-800 to-gray-900 shadow-lg text-gray-800 font-parkinsans"
+    >
+      <nav class="grid grid-flow-col gap-4">
+        <a class="link link-hover text-white">About us</a>
+        <a class="link link-hover text-white">Contact</a>
+        <a class="link link-hover text-white">Jobs</a>
+      </nav>
+      <nav>
+        <div class="grid grid-flow-col gap-4">
+          <i class="text-3xl text-purple-600 ph ph-instagram-logo"></i>
+          <i class="text-3xl text-purple-600 ph ph-x-logo"></i>
+          <i class="text-3xl text-purple-600 ph ph-github-logo"></i>
+        </div>
+      </nav>
+      <aside>
+        <p class="text-white">Copyright © 2024 - Abdulla Al Harun</p>
+      </aside>
+    </footer>
+  </body>
+</html>

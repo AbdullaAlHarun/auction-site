@@ -1,17 +1,20 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-      './src/**/*.{html,js}', // Adjust paths to include your source files
       './index.html',
+        './account/auth.html',
+        './profile/index.html',
+        './profile/create.html',
+        './src/**/*.{html,js}',
     ],
     theme: {
-      extend: {}, // Add customizations here if needed
+      extend: {}, 
     },
     plugins: [
-      require('daisyui'), // Add DaisyUI as a plugin
+      require('daisyui'), 
     ],
     daisyui: {
-      themes: false, // Optional: Disable themes for static colors
+      themes: false, 
     },
   };
   

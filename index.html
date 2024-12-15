@@ -46,7 +46,7 @@
           <div class="dropdown dropdown-end">
             <div tabindex="0" class="btn btn-ghost avatar">
               <div
-                class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center"
+                class="w-10 p-1 h-10 rounded-full bg-gray-100 flex items-center justify-center"
               >
                 <img
                   src="assets/icons/user.png"
@@ -84,38 +84,44 @@
       </div>
     </header>
 
-    <br />
-    <br />
-    <br />
-
-    <!-- <div class="relative mt-[64px] h-screen">
-        
-        <div class="w-full h-full flex items-center justify-center bg-opacity-80 bg-white rounded-lg shadow-lg text-gray-800 font-montserrat text-center z-10">
-            <div class="w-full max-w-2xl">
-                
-                <h1 class="text-5xl font-bold mb-4">Explore Unique Auctions</h1>
-
-                <p class="text-lg mb-6">Discover and bid on items you won’t find anywhere else.</p>
-
-              
-                <p class="pb-8 text-center">
-                    Sign up today to claim your <span class="text-purple-600">1000 credits</span> and start bidding on exclusive items
-                </p>
-
-           
-                <div class="w-full flex items-center justify-center gap-4">
-                    <button class="rounded px-6 py-3 text-white btn btn-primary bg-purple-600 hover:bg-purple-700">
-                        <a href="#bidTitle" class="scroll-smooth">Explore</a>
-                    </button>
-                    <p>Or</p>
-                    <a href="account/auth.html" class="scroll-smooth rounded px-6 py-3 text-gray-800 btn btn-outline btn-accent">
-                        Login
-                    </a>
-                </div>
-            </div>
+    <div class="hero min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+      <div class="hero-content flex-col lg:flex-row-reverse gap-8">
+        <div class="relative w-full max-w-lg">
+          <img
+            src="assets/images/hero.png"
+            class="rounded-lg shadow-2xl transform hover:scale-105 transition duration-500"
+            alt="Auction illustration"
+          />
+          <div class="absolute top-2 right-2 bg-white text-black text-sm px-3 py-1 rounded-lg shadow-lg">
+            <span class="font-bold">Start Bidding Now!</span>
+          </div>
         </div>
-    </div> 
--->
+        <div class="text-center lg:text-left">
+          <h1 class="text-6xl font-extrabold leading-tight mb-6">
+            Discover Amazing <span class="text-yellow-400">Auctions</span>
+            <br /> Anytime, Anywhere
+          </h1>
+          <p class="text-lg mb-6">
+            Join the ultimate auction platform to explore unique treasures and exclusive deals.
+            Start with <span class="font-bold">1000 free credits</span> when you sign up!
+          </p>
+          <div class="flex justify-center lg:justify-start gap-4">
+            <a href="account/auth.html">
+              <button class="btn btn-primary px-8 py-3 rounded-full text-lg shadow-lg hover:scale-105 transition duration-300">
+                Get Started
+              </button>
+            </a>
+            <a href="/listings">
+              <button
+                class="btn btn-outline border-white text-white px-8 py-3 rounded-full text-lg shadow-lg hover:bg-white hover:text-black hover:scale-105 transition duration-300">
+                Browse Listings
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
 
     <div class="flex flex-col justify-center font-montserrat">
       <div class="flex py-4">

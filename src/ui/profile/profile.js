@@ -3,7 +3,7 @@ import { fetchListingsByUser } from '../../api/listings/userListings.js';
 import { updateAvatar } from '../../api/profile/updateAvatar.js';
 import { profileData } from '../../api/profile/profileData.js';
 
-
+// Display profile data
 async function displayProfile() {
     const profile = await profileData();
 
@@ -27,7 +27,7 @@ async function displayProfile() {
 }
 displayProfile();
 
-
+// Display listings by user
 async function displayListings() {
     const listings = await fetchListingsByUser();
 
@@ -88,6 +88,6 @@ document.getElementById('submitAvatarBtn').addEventListener('click', () => {
     }
 });
 
-
+// Call the updated login/logout functions
 updateLogin();
 logoutHandler();

@@ -4,32 +4,24 @@ import { createListing } from '../../api/listings/createListing.js';
 document.getElementById('createForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    // Fetch form field values
     const title = document.getElementById('title').value.trim();
     const description = document.getElementById('description').value.trim();
     const tags = document.getElementById('tags').value.trim();
     const media = document.getElementById('media').value.trim();
     const endsAtInput = document.getElementById('endsAt').value.trim();
 
-    // Validation
-    if (!title) {
-        alert('Title is required.');
-        return;
-    }
-
-    if (!endsAtInput) {
-        alert('Ends At date and time is required.');
-        return;
-    }
-
-    // Validate Ends At format
+    // Validate endsAt (date-time)
     const isoFormatRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
     if (!isoFormatRegex.test(endsAtInput)) {
         alert('Please enter the date and time in the correct format.');
         return;
     }
 
+    // Convert to ISO format
     const endsAt = new Date(endsAtInput).toISOString();
 
+    // Create listing object
     const listingData = {
         title,
         description: description || undefined,
@@ -38,20 +30,20 @@ document.getElementById('createForm').addEventListener('submit', async (event) =
             ? [
                 {
                     url: media,
-                    alt: 'User-provided image',
+                    alt: 'User-provided data',
                 },
             ]
             : undefined,
         endsAt,
     };
 
+    // API call to create listing
     try {
         const result = await createListing(listingData);
         console.log('Listing created successfully:', result);
-        alert('Listing created successfully!');
-        window.location.href = '../index.html'; // Redirect to homepage
+        // Redirect to homepage or another page after successful creation
+        window.location.href = 'index.html';
     } catch (error) {
-        alert('Failed to create listing. Please try again.');
         console.error('Failed to create listing:', error.message);
     }
 });

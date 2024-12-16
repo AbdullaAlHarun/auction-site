@@ -1,6 +1,6 @@
 // Check if user is logged in
 export function loggedIn() {
-    const accessToken = sessionStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
     return accessToken !== null;
 }
 
@@ -21,8 +21,8 @@ export function updateLogin() {
 // Log out function
 export function logOut(event) {
     if (event) event.preventDefault();
-    sessionStorage.removeItem('accessToken');
-    sessionStorage.removeItem('name');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('name');
     window.location.href = '../../../../index.html';
 }
 
@@ -31,18 +31,6 @@ export function logoutHandler() {
     const logoutBtn = document.getElementById('loginAnchor');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function (event) {
-            if (loggedIn()) {
-                logOut(event);
-            }
-        });
-    }
-}
-
-// Logout function for profile page
-export function profileLogout() {
-    const profileLogoutBtn = document.getElementById('logoutBtn');
-    if (profileLogoutBtn) {
-        profileLogoutBtn.addEventListener('click', function (event) {
             if (loggedIn()) {
                 logOut(event);
             }

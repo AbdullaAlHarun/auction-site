@@ -8,7 +8,6 @@ async function displayProfile() {
     const profile = await profileData();
 
     if (profile) {
-        document.getElementById('name').textContent = profile.name;
         document.getElementById('email').textContent = profile.email;
         document.getElementById('nameHeader').textContent = profile.name;
         document.getElementById('creditsHeader').textContent = `${profile.credits}`;

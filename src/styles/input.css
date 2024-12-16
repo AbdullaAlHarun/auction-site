@@ -10,6 +10,24 @@ html {
   scroll-behavior: smooth;
 }
 
+#dropdownMenu {
+  display: none; /* Start hidden */
+  position: absolute;
+  top: 100%; /* Align to the bottom edge of the avatar */
+  right: 0;
+  margin-top: 0.5rem; /* Adjust spacing */
+  width: 14rem; /* Same as Tailwind w-56 */
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  z-index: 50;
+}
+
+#dropdownMenu.active {
+  display: block;
+}
+
+
 #singleListingImage {
   width: 100%; /* Ensure it adapts to the container's width */
   max-height: 600px; /* Set a maximum height */

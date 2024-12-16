@@ -1,116 +1,146 @@
 import './styles/input.css';
 import { updateLogin, logoutHandler, loggedIn, profileVisibility } from './ui/auth/authHelpers.js';
-import { displayListings } from './ui/listings/feed.js';
 import { profileData } from './api/profile/profileData.js';
 import { fetchSearch } from './api/listings/searchListings.js';
 
-// Target the search input and results container
-const searchInput = document.getElementById('searchInput');
-const resultsDiv = document.getElementById('listingsContainer');
-
-/**
- * Handles the search functionality.
- * Fetches and displays search results based on user input.
- */
-searchInput.addEventListener('input', async function () {
-    const query = searchInput.value.trim();
-    const listingId = null;
-
-    if (query.length > 2) {
-        try {
-            const { searchResults } = await fetchSearch(query, listingId);
-            if (Array.isArray(searchResults)) {
-                renderSearchResults(searchResults);
-            } else {
-                console.error('searchResults is not an array', searchResults);
-            }
-        } catch (error) {
-            console.error('Error fetching search results:', error);
-        }
-    } else {
-        // Clear results and display default listings when search query is less than 3 characters
-        resultsDiv.innerHTML = '';
-        displayListings();
-    }
+// Entry point: Initialize functionality
+document.addEventListener('DOMContentLoaded', () => {
+    initializeHeader();
+    setupSearchHandler();
 });
 
 /**
- * Renders search results in the results container.
- * @param {Array} searchResults - List of search results to display.
+ * Initialize the header, manage login/logout state, and set up profile display.
  */
-function renderSearchResults(searchResults) {
-    resultsDiv.innerHTML = '';
-    searchResults.forEach(listing => {
-        const listingDiv = document.createElement('div');
-        listingDiv.className = 'listing-card m-2';
-        listingDiv.innerHTML = `
-            <div>
-                ${
-                    listing.media.length > 0
-                        ? `<img src="${listing.media[0].url}" alt="${listing.media[0].alt || listing.title}" class="media-img">`
-                        : '<p>No media available</p>'
-                }
-            </div>
-            <div class="flex items-center px-3 mx-3 mt-2 bg-customWhite text-customDark rounded">
-                <p><span class="font-semibold">Ends in:</span> Check listing page</p>
-            </div>
-            <div class="px-3 pt-2">
-                <h2 class="text-xl font-medium capitalize">${listing.title}</h2>
-                <p class="capitalize">${listing.description || 'No description available'}</p>
-                <p><strong>Ends At:</strong> ${new Date(listing.endsAt).toLocaleDateString()}</p>
-                <p><strong>Bids:</strong> ${listing._count.bids || 0}</p>
-                <p>${listing.tags.length > 0 ? listing.tags.join(', ') : 'No tags'}</p>
-                <div class="border-b-2 border-white opacity-50 my-3"></div> 
-                <a href="../listing/singleListing.html?id=${listing.id}">
-                    <button class="flex flex-row gap-2 items-center mb-2">
-                        See listing
-                        <i class="ph ph-arrow-up-right text-base text-red-700 bg-white w-6 h-6 flex items-center justify-center rounded-full"></i>
-                    </button>
-                </a>                  
-            </div>
-        `;
-        resultsDiv.appendChild(listingDiv);
-    });
+async function initializeHeader() {
+    const isLoggedIn = loggedIn(); // Check if the user is logged in
+    toggleHeaderElements(isLoggedIn); // Update header elements based on login state
+
+    if (isLoggedIn) {
+        await displayProfileData(); // Fetch and display user profile data
+    }
+
+    setupLogoutHandler(); // Set up logout functionality
+    updateLogin(); // Update login/logout button in header
+    profileVisibility(); // Adjust visibility of profile dropdown
 }
 
 /**
- * Fetches and displays user profile data in the header.
+ * Toggle the visibility of header elements based on login state.
+ * @param {boolean} isLoggedIn - User's login status.
  */
-async function displayProfile() {
-    try {
-        const profile = await profileData();
-        if (profile) {
-            document.getElementById('name').textContent = profile.name;
-            document.getElementById('credits').textContent = `Credits: ${profile.credits}`;
+function toggleHeaderElements(isLoggedIn) {
+    const userSection = document.getElementById('userSection');
+    const loginButton = document.getElementById('loginButton');
 
-            const avatar = document.getElementById('avatar');
-            avatar.src = profile.avatar.url || 'default-avatar.png';
-            avatar.alt = profile.avatar.alt || 'User Avatar';
-        }
-    } catch (error) {
-        console.error('Error fetching profile data:', error);
+    if (isLoggedIn) {
+        userSection.classList.remove('hidden');
+        loginButton.classList.add('hidden');
+    } else {
+        userSection.classList.add('hidden');
+        loginButton.classList.remove('hidden');
     }
 }
-displayProfile();
 
 /**
- * Ensures users are logged in before navigating to the profile page or creating a listing.
+ * Fetch and display the logged-in user's profile data.
  */
-const profileBtn = document.querySelector('.profileBtn');
-const createBtn = document.querySelector('.createBtn');
-if (profileBtn && createBtn) {
-    [profileBtn, createBtn].forEach(button => {
-        button.addEventListener('click', e => {
-            if (!loggedIn()) {
-                e.preventDefault();
-                alert('You need to be logged in. Click OK to go to the login page.');
-                window.location.href = "../account/auth.html";
+async function displayProfileData() {
+    try {
+        const profile = await profileData(); // Fetch user profile data
+        if (profile) {
+            // Update the header with profile details
+            document.getElementById('name').textContent = profile.name;
+            document.getElementById('credits').textContent = `Credits: ${profile.credits}`;
+            
+            // Set avatar or fallback to default
+            const avatar = document.getElementById('avatar');
+            avatar.src = profile.avatar?.url || 'assets/icons/default-avatar.png';
+            avatar.alt = profile.avatar?.alt || 'Default Avatar';
+        }
+    } catch (error) {
+        console.error('Failed to fetch profile data:', error);
+    }
+}
+
+/**
+ * Set up the logout functionality.
+ */
+function setupLogoutHandler() {
+    const logoutButton = document.getElementById('loginAnchor'); // Ensure it targets the correct ID
+    if (logoutButton) {
+        logoutButton.addEventListener('click', (event) => {
+            if (loggedIn()) {
+                event.preventDefault(); // Prevent default anchor behavior
+                localStorage.removeItem('accessToken'); // Clear the session token
+                localStorage.removeItem('name'); // Clear any other stored user data
+                window.location.href = 'account/auth.html'; // Redirect to login page
             }
         });
+    }
+}
+
+/**
+ * Set up the search bar functionality.
+ */
+function setupSearchHandler() {
+    const searchInput = document.getElementById('searchInput');
+    const resultsDiv = document.getElementById('listingsContainer');
+
+    searchInput.addEventListener('input', async function () {
+        const query = searchInput.value.trim(); // Trim whitespace
+        if (query.length > 2) {
+            await handleSearch(query, resultsDiv);
+        } else {
+            resultsDiv.innerHTML = ''; // Clear search results if query is too short
+        }
     });
 }
 
-// Initialize login/logout functions and profile visibility
+/**
+ * Fetch and display search results based on the input query.
+ * @param {string} query - Search query entered by the user.
+ * @param {HTMLElement} resultsDiv - Container for displaying search results.
+ */
+async function handleSearch(query, resultsDiv) {
+    try {
+        const { searchResults } = await fetchSearch(query, null);
+        if (Array.isArray(searchResults)) {
+            resultsDiv.innerHTML = ''; // Clear previous results
+            searchResults.forEach(listing => {
+                resultsDiv.appendChild(createListingCard(listing));
+            });
+        } else {
+            console.error('Invalid search results format:', searchResults);
+        }
+    } catch (error) {
+        console.error('Error during search:', error);
+    }
+}
+
+/**
+ * Create a DOM element for a single listing card.
+ * @param {Object} listing - Listing data.
+ * @returns {HTMLElement} - The DOM element for the listing card.
+ */
+function createListingCard(listing) {
+    const listingDiv = document.createElement('div');
+    listingDiv.className = 'listing-card m-2';
+
+    const mediaContent = listing.media.length > 0
+        ? `<img src="${listing.media[0].url}" alt="${listing.media[0].alt || listing.title}" class="media-img">`
+        : 'No media available';
+
+    listingDiv.innerHTML = `
+        <div>${mediaContent}</div>
+        <div class="px-3 pt-2">
+            <h2 class="text-xl font-medium capitalize">${listing.title}</h2>
+            <p>${listing.description}</p>
+        </div>
+    `;
+    return listingDiv;
+}
+
+// Call the updated login/logout functions
 updateLogin();
 logoutHandler();
-profileVisibility();

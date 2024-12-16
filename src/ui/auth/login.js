@@ -1,6 +1,6 @@
 import { loginUser } from '../../api/auth/login.js';
 
-// elements
+// Elements
 const loginFormElement = document.getElementById('login');
 const registerFormElement = document.getElementById('register');
 const loginEmail = document.getElementById('loginEmail');
@@ -8,7 +8,7 @@ const loginPassword = document.getElementById('loginPassword');
 const loginBtn = document.getElementById('loginBtn');
 const errorMessage = document.getElementById('errorMessage');
 
-// event listener for login
+// Event listener for login
 loginBtn.addEventListener('click', async function () {
     const mailValue = loginEmail.value;
     const pwdValue = loginPassword.value;
@@ -17,8 +17,8 @@ loginBtn.addEventListener('click', async function () {
         const data = await loginUser(mailValue, pwdValue);
 
         alert(`User ${data.data.name} successfully logged in!`);
-        sessionStorage.setItem('name', data.data.name);
-        sessionStorage.setItem('accessToken', data.data.accessToken);
+        localStorage.setItem('name', data.data.name);
+        localStorage.setItem('accessToken', data.data.accessToken);
 
         window.location.href = '../../../index.html';
     } catch (error) {
@@ -27,7 +27,7 @@ loginBtn.addEventListener('click', async function () {
     }
 });
 
-// toggle between forms
+// Toggle between forms
 const registerLink = document.getElementById('registerLink');
 const loginLink = document.getElementById('loginLink');
 

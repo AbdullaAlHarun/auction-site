@@ -1,4 +1,4 @@
-
+// Fetch all listings from all users
 import { API_BASE_LISTINGS } from '../../utils/contants.js';
 import { defaultHeaders } from '../../utils/headers.js';
 

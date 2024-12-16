@@ -12,13 +12,17 @@ export async function createListing(listingData) {
 
         if (!response.ok) {
             console.error('Response details:', response);
-            throw new Error(`HTTP error ${response.status}`);
+            const errorResponse = await response.json();
+            throw new Error(`HTTP error ${response.status}: ${errorResponse.message || 'Unknown error'}`);
         }
 
-        const { data } = await response.json();
-        return data;
+        // Parse the response
+        const responseData = await response.json();
+
+        // Return the data object or the entire response, depending on the API
+        return responseData.data || responseData;
     } catch (error) {
-        console.error('Error creating listing', error.message);
+        console.error('Error creating listing:', error.message);
         throw error;
     }
 }

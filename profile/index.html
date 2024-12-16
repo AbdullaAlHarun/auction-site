@@ -14,59 +14,76 @@
     <script src="/src/ui/profile/profile.js" type="module" defer></script>
   </head>
   <body
-    data-theme="dark"
-    class="bg-gradient-to-br from-gray-900 via-gray-800 to-purple-900 text-gray-100"
+    class="bgbg-purple-50"
   >
-    <!-- Header -->
-    <header
-      class="bg-gradient-to-br from-gray-800 via-purple-800 to-gray-900 shadow-lg"
-    >
-      <div class="container mx-auto flex items-center justify-between p-4">
-        <a
-          href="../index.html"
-          class="flex items-center text-2xl font-bold text-white"
-        >
-          <span class="text-white">Bid</span
-          ><span class="text-red-400">Nest</span>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-gray-800 via-purple-800 to-gray-900">
+    <div class="container mx-auto flex items-center justify-between px-6 py-4">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="../index.html" class="flex items-center text-2xl font-bold text-white">
+          <span class="text-white">Bid</span><span class="text-red-400">Nest</span>
         </a>
-        <div class="flex items-center gap-4">
-          <div class="text-right">
-            <p id="nameHeader" class="font-bold"></p>
-            <p class="text-sm text-green-400 ">
-              Credits: <span id="creditsHeader"></span>
-            </p>
-          </div>
-          <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-circle avatar">
-              <div class="w-10 rounded-full">
-                <img class="avatar-image" src="" alt="User Avatar" id="avatar"/>
+      </div>
+  
+      <!-- User Section -->
+      <div class="flex items-center gap-6">
+        <div class="profileDropdown dropdown dropdown-end relative" id="userSection">
+          <div class="flex items-center">
+            <!-- User Info -->
+            <div id="profile" class="flex flex-col items-baseline pl-4 gap-1">
+              <p id="nameHeader" class="font-normal text-white"></p>
+              <p id="creditsHeader" class="font-normal text-accent"></p>
+            </div>
+            <!-- Avatar -->
+            <div tabindex="0" class="btn btn-ghost avatar">
+              <div
+                class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shadow-lg"
+              >
+                <img
+                  src="assets/icons/user.png"
+                  alt="User Avatar"
+                  id="avatar"
+                  class="w-full rounded-full"
+                />
               </div>
-            </label>
-            <ul
-              tabindex="0"
-              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-gray-700 rounded-box w-52"
-            >
-              <li><a href="../profile/index.html">Profile</a></li>
-              <li><a href="create.html">Create Listing</a></li>
-              <li><a id="loginAnchor" href="index.html">Logout</a></li>
-            </ul>
+            </div>
           </div>
+          <!-- Dropdown Menu -->
+          <ul
+            tabindex="0"
+            class="absolute right-0 mt-3 w-56 bg-white shadow-lg text-gray-800 menu menu-sm dropdown-content rounded-lg border border-gray-200 overflow-hidden transform scale-95 opacity-0 transition duration-300 ease-in-out origin-top-right dropdown-menu"
+          >
+            <li class="profileBtn hover:bg-gray-100">
+              <a href="../profile/index.html" class="flex justify-between px-4 py-2">Profile</a>
+            </li>
+            <li class="createBtn hover:bg-gray-100">
+              <a href="../profile/create.html" class="flex px-4 py-2">Create Listing</a>
+            </li>
+            <li class="hover:bg-gray-100">
+              <a id="loginAnchor" href="../account/auth.html" class="flex px-4 py-2">Logout</a>
+            </li>
+          </ul>
         </div>
       </div>
-    </header>
-
+    </div>
+  </header>
+    
+    
+    
     <!-- Main Content -->
     <main class="container mx-auto mt-8">
       <!-- Profile Header -->
       <section class="text-center mb-8">
         <h1 class="text-3xl font-extrabold">Welcome to Your Profile</h1>
         <p class="text-gray-400">
-            Manage your auctions, account details, and activity history
+          Manage your auctions, account details, and activity history
         </p>
         <div class="mt-4 justify-center flex">
           <a href="create.html">
             <button
-              class="text-white btn bg-amber-600 hover:bg-amber-700 sm:flex"
+              class="text-white btn bg-green-600 hover:bg-green-700 sm:flex"
             >
               Create Listing
             </button>
@@ -76,9 +93,12 @@
 
       <div class="flex flex-wrap gap-8 justify-center">
         <!-- Avatar Section -->
-        <div class="card bg-gray-700 p-6 shadow-xl">
+        <div class="card bg-[#E9ECEF] p-6 shadow-xl">
           <div class="flex flex-col items-center gap-4">
-            <img class="h-40 w-40 self-center rounded-full object-cover" src="" id="avatar" alt="User Avatar"/>
+            <p class="text-sm text-[#212529]  items-center">
+              Your avatar helps others recognize you.<br>
+               Use a live image URL of a profile photo or icon you like.
+            </p>
             <p id="email" class="text-lg font-semibold"></p>
             <button id="editAvatarBtn" class="btn btn-warning">
               Edit Avatar
@@ -92,9 +112,7 @@
               class="input input-bordered w-full"
               placeholder="Enter new avatar URL"
             />
-            <div class="text-sm text-gray-400">
-              Use a live image URL 
-            </div>
+            <div class="text-sm text-gray-400">Use a live image URL</div>
             <div class="flex gap-2">
               <button id="submitAvatarBtn" class="btn btn-success">
                 Update
@@ -106,7 +124,7 @@
 
         <!-- Account Information Section -->
         <section class="mt-12">
-          <h2 class="text-2xl font-bold text-center mb-6">
+          <h2 class="text-2xl font-bold text-center mb-6 bg-red-500 p-2">
             Account Information
           </h2>
           <div
@@ -114,7 +132,7 @@
           >
             <!-- Credits Card -->
             <div
-              class="card w-full lg:w-1/4 bg-gray-700 shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6"
+              class="card w-full lg:w-1/4 bg-[#E9ECEF] shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6"
             >
               <div class="flex flex-col items-center">
                 <i class="ph ph-coin text-5xl text-amber-500 mb-4"></i>
@@ -133,7 +151,7 @@
 
             <!-- Listings Card -->
             <div
-              class="card w-full lg:w-1/4 bg-gray-700 shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6"
+              class="card w-full lg:w-1/4 bg-[#E9ECEF] shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6"
             >
               <div class="flex flex-col items-center">
                 <i class="ph ph-list-checks text-5xl text-blue-500 mb-4"></i>
@@ -153,7 +171,7 @@
 
             <!-- Wins Card -->
             <div
-              class="card w-full lg:w-1/4 bg-gray-700 shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6"
+              class="card w-full lg:w-1/4 bg-[#E9ECEF] shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6"
             >
               <div class="flex flex-col items-center">
                 <i class="ph ph-trophy text-5xl text-green-500 mb-4"></i>
@@ -171,42 +189,95 @@
         </section>
       </div>
 
-      <div class="flex flex-col items-center gap-4 py-12 pb-12 font-montserrat text-customWhite">
+      <div
+        class="flex flex-col items-center gap-4 py-12 pb-12 font-montserrat text-customWhite"
+      >
         <h1 class="text-xl pb-4 font-semibold">Your listings</h1>
-        <div id="listingsContainer" class="grid grid-cols-1 items-center justify-center gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-            <div id="listingTemplate" class="hidden h-20 w-80 rounded-md py-7 pl-4 bg-customDark shadow-sm shadow-black hover:scale-95 duration-300">
-                <a id="listingLink" href="#" class="block">
-                    <h2 class="card-title">
-                        <span id="listingTitle"></span>
-                        <div id="listingBadge" class="flex justify-center rounded-2xl p-1 text-xs text-white w-[52px] h-[25] badge-success animate-pulse">NEW</div>
-                    </h2>
-                </a>
+        <div
+        id="listingsContainer"
+        class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4"
+      >
+        <div
+          id="listingTemplate"
+          class="hidden rounded-lg bg-white shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300"
+        >
+          <a id="listingLink" href="#" class="block p-5">
+            <h2 class="text-xl font-bold text-gray-800 mb-2 truncate">
+              <span id="listingTitle">Sample Listing</span>
+            </h2>
+            <div
+              id="listingBadge"
+              class="inline-block text-xs font-semibold bg-green-500 text-white px-3 py-1 rounded-full"
+            >
+              NEW
             </div>
+          </a>
         </div>
-    </div>
-
-
+      </div>
+      
+      </div>
     </main>
 
-    <!-- Footer -->
     <footer
-      class="rounded p-10 footer footer-center bg-opacity-80 bg-gradient-to-br from-gray-800 via-purple-800 to-gray-900 shadow-lg text-gray-800 font-parkinsans"
+      class=" bg-gradient-to-br from-gray-800 via-purple-800 to-gray-900 shadow-lg text-white py-8"
     >
-      <nav class="grid grid-flow-col gap-4">
-        <a class="link link-hover text-white">About us</a>
-        <a class="link link-hover text-white">Contact</a>
-        <a class="link link-hover text-white">Jobs</a>
-      </nav>
-      <nav>
-        <div class="grid grid-flow-col gap-4">
-          <i class="text-3xl text-purple-600 ph ph-instagram-logo"></i>
-          <i class="text-3xl text-purple-600 ph ph-x-logo"></i>
-          <i class="text-3xl text-purple-600 ph ph-github-logo"></i>
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- About Section -->
+        <div>
+          <h3 class="text-lg font-semibold mb-3">About BidNest</h3>
+          <p class="text-sm text-gray-300">
+            BidNest is your trusted platform for secure and exciting auctions. Discover, bid, and win unique items from trusted sellers.
+          </p>
         </div>
-      </nav>
-      <aside>
-        <p class="text-white">Copyright © 2024 - Abdulla Al Harun</p>
-      </aside>
-    </footer>
+  
+        <!-- Quick Links -->
+        <div>
+          <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-purple-400 transition">Home</a></li>
+            <li><a href="#" class="hover:text-purple-400 transition">About Us</a></li>
+            <li><a href="#" class="hover:text-purple-400 transition">How It Works</a></li>
+            <li><a href="#" class="hover:text-purple-400 transition">Contact Us</a></li>
+          </ul>
+        </div>
+  
+        <!-- Contact Section -->
+        <div>
+          <h3 class="text-lg font-semibold mb-3">Contact</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="mailto:support@bidnest.com" class="hover:text-purple-400 transition">
+                <i class="ph ph-envelope"></i> support@bidnest.com
+              </a>
+            </li>
+            <li>
+              <a href="tel:+123456789" class="hover:text-purple-400 transition">
+                <i class="ph ph-phone"></i> +1 (234) 567-890
+              </a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-purple-400 transition">
+                <i class="ph ph-map-pin"></i> 123 Auction Lane, Auction City
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  
+      <!-- Bottom Section -->
+      <div class="mt-8 border-t border-gray-700 pt-4">
+        <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+          <p>&copy; 2024 BidNest. All rights reserved.</p>
+          <div class="flex space-x-4 mt-4 md:mt-0">
+            <a href="#" class="hover:text-purple-400 transition">Privacy Policy</a>
+            <a href="#" class="hover:text-purple-400 transition">Terms of Service</a>
+            <a href="#" class="hover:text-purple-400 transition">Help</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
   </body>
 </html>

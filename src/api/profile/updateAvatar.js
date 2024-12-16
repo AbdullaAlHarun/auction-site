@@ -1,3 +1,4 @@
+// Update avatar request
 import { authHeaders } from '../../utils/headers.js';
 
 export async function updateAvatar(avatarUrl) {

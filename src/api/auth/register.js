@@ -1,4 +1,4 @@
-import { API_REGISTER } from '../../utils/contants.js';
+import { API_AUTH_KEY, API_REGISTER } from '../../utils/contants.js';
 
 export async function registerUser(registerData) {
     try {
@@ -6,19 +6,18 @@ export async function registerUser(registerData) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-Noroff_API_KEY': API_AUTH_KEY
             },
             body: JSON.stringify(registerData),
         });
 
         if (!response.ok) {
-            const errorText = await response.text();
-            console.error('API Error Response:', errorText);
-            throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         return await response.json();
     } catch (error) {
-        console.error('Register error:', error.message);
+        console.error('Register error:', error);
         throw error;
     }
 }

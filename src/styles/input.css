@@ -10,6 +10,15 @@ html {
   scroll-behavior: smooth;
 }
 
+#singleListingImage {
+  width: 100%; /* Ensure it adapts to the container's width */
+  max-height: 600px; /* Set a maximum height */
+  object-fit: cover; /* Ensures the image is cropped rather than distorted */
+  border-radius: 8px; /* Keeps the rounded corners */
+  display: block; /* Prevents inline spacing issues */
+  margin: 0 auto; /* Centers the image */
+}
+
 /* Card Container */
 .listing-card {
   background: linear-gradient(to bottom right, #ffffff, #f3f4f6); /* Light gradient background */

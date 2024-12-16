@@ -154,21 +154,67 @@
       </div>
 
     </main>
-    <footer class="bg-gray-800 py-6 mt-10">
-      <div class="container mx-auto text-center text-gray-400">
-          <nav class="mb-4 flex justify-center gap-6">
-              <a href="#" class="hover:text-white">About us</a>
-              <a href="#" class="hover:text-white">Contact</a>
-              <a href="#" class="hover:text-white">Jobs</a>
-          </nav>
-          <div class="flex justify-center gap-6 mb-4">
-              <i class="fab fa-instagram text-2xl text-gray-500 hover:text-white"></i>
-              <i class="fab fa-twitter text-2xl text-gray-500 hover:text-white"></i>
-              <i class="fab fa-github text-2xl text-gray-500 hover:text-white"></i>
-          </div>
-          <p>&copy; 2024 BidWise. All rights reserved.</p>
-      </div>
-  </footer>
+ <!--Footer Section-->
+ <footer
+ class=" bg-gradient-to-br from-gray-800 via-purple-800 to-gray-900 shadow-lg text-gray-800 text-white py-8"
+>
+<div class="container mx-auto px-6">
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+   <!-- About Section -->
+   <div>
+     <h3 class="text-lg font-semibold mb-3">About BidNest</h3>
+     <p class="text-sm text-gray-300">
+       BidNest is your trusted platform for secure and exciting auctions. Discover, bid, and win unique items from trusted sellers.
+     </p>
+   </div>
+
+   <!-- Quick Links -->
+   <div>
+     <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+     <ul class="space-y-2 text-sm">
+       <li><a href="#" class="hover:text-purple-400 transition">Home</a></li>
+       <li><a href="#" class="hover:text-purple-400 transition">About Us</a></li>
+       <li><a href="#" class="hover:text-purple-400 transition">How It Works</a></li>
+       <li><a href="#" class="hover:text-purple-400 transition">Contact Us</a></li>
+     </ul>
+   </div>
+
+   <!-- Contact Section -->
+   <div>
+     <h3 class="text-lg font-semibold mb-3">Contact</h3>
+     <ul class="space-y-2 text-sm">
+       <li>
+         <a href="mailto:support@bidnest.com" class="hover:text-purple-400 transition">
+           <i class="ph ph-envelope"></i> support@bidnest.com
+         </a>
+       </li>
+       <li>
+         <a href="tel:+123456789" class="hover:text-purple-400 transition">
+           <i class="ph ph-phone"></i> +1 (234) 567-890
+         </a>
+       </li>
+       <li>
+         <a href="#" class="hover:text-purple-400 transition">
+           <i class="ph ph-map-pin"></i> 123 Auction Lane, Auction City
+         </a>
+       </li>
+     </ul>
+   </div>
+ </div>
+
+ <!-- Bottom Section -->
+ <div class="mt-8 border-t border-gray-700 pt-4">
+   <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+     <p>&copy; 2024 BidNest. All rights reserved.</p>
+     <div class="flex space-x-4 mt-4 md:mt-0">
+       <a href="#" class="hover:text-purple-400 transition">Privacy Policy</a>
+       <a href="#" class="hover:text-purple-400 transition">Terms of Service</a>
+       <a href="#" class="hover:text-purple-400 transition">Help</a>
+     </div>
+   </div>
+ </div>
+</div>
+</footer>
   
   <script>
     const tabs = document.querySelectorAll("[data-tab]");

@@ -1,3 +1,4 @@
+// Fetch profile data
 import { API_KEY } from '../../utils/contants.js';
 import { API_PROFILES } from '../../utils/contants.js';
 
